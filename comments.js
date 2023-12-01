@@ -1,11 +1,22 @@
-const http = require('http');
+const express = require('express');
+const app = express();
+const port = 3000;
 
-const server = http.createServer((req, res) => {
-  res.statusCode = 200;
-  res.setHeader('Content-Type', 'text/plain');
-  res.end('Hello, world!');
+app.use(express.json());
+
+app.post('/api/data', (req, res) => {
+  // Handle the POST request here
+  // You can access the request body using req.body
+
+  // Example response
+  const response = {
+    message: 'Received POST request',
+    data: req.body
+  };
+
+  res.json(response);
 });
 
-server.listen(3000, 'localhost', () => {
-  console.log('Server running at http://localhost:3000/');
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
 });
